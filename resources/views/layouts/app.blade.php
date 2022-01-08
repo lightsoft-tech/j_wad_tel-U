@@ -39,6 +39,9 @@
                             <a class="nav-link @if (Request::segment(1) == 'back-menu') text-black @endif" href="{{ route('menu') }}">{{ __('Master Menu') }} </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link @if (Request::segment(1) == 'back-berita') text-black @endif" href="{{ route('berita') }}">{{ __('Master Berita') }} </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link @if (Request::segment(1) == 'back-faq') text-black @endif" href="{{ route('faq') }}">{{ __('FAQ') }} </a>
                         </li>
                         <li class="nav-item">

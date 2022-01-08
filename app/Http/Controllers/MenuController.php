@@ -20,12 +20,6 @@ class MenuController extends Controller
         return view('backend.barang.list', $this->param);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [

@@ -7,79 +7,115 @@ use Illuminate\Http\Request;
 
 class BeritaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $param;
+    public function __construct()
+    {
+        $this->middleware(['role:admin']);
+    }
+
     public function index()
     {
-        //
+        $this->param['getBerita'] = Berita::get();
+        return view('backend.berita.list', $this->param);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+                'title' => 'required',
+                'desc' => 'required',
+            ],
+            [
+                'required' => ':attribute harus diisi.',
+            ],
+            [
+                'title' => 'Judul',
+                'desc' => 'Deskripsi',
+            ],
+        );
+
+        try {
+            $date = date('H-i-s');
+            $random = \Str::random(5);
+
+            $berita = new Berita();
+            $berita->judul = $request->title;
+            $berita->deskripsi = $request->desc;
+
+            if ($request->file('image')) {
+                $request->file('image')->move('upload/berita', $date.$random.$request->file('image')->getClientOriginalName());
+                $berita->gambar = $date.$random.$request->file('image')->getClientOriginalName();
+            } else {
+                $berita->gambar = 'berita.jpg';
+            }
+
+            $berita->save();
+            return redirect('/back-berita')->withStatus('Berhasil menambah data');
+        } catch(\Throwable $e){
+            return redirect()->back()->withError($e->getMessage());
+        } catch(\Illuminate\Database\QueryException $e){
+            return redirect()->back()->withError($e->getMessage());
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Berita  $berita
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Berita $berita)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Berita  $berita
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Berita $berita)
     {
-        //
+        try {
+            $this->param['getDetailBerita'] = Berita::find($berita->id);
+            return view('backend.berita.edit', $this->param);
+        } catch(\Throwable $e){
+            return redirect()->back()->withError($e->getMessage());
+        } catch(\Illuminate\Database\QueryException $e){
+            return redirect()->back()->withError($e->getMessage());
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Berita  $berita
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Berita $berita)
     {
-        //
+        $this->validate($request, [
+                'title' => 'required',
+                'desc' => 'required',
+            ],
+            [
+                'required' => ':attribute harus diisi.',
+            ],
+            [
+                'title' => 'Judul',
+                'desc' => 'Deskripsi',
+            ],
+        );
+
+        try {
+            $date = date('H-i-s');
+            $random = \Str::random(5);
+
+            $berita = Berita::find($berita->id);
+            $berita->judul = $request->title;
+            $berita->deskripsi = $request->desc;
+
+            if ($request->file('image')) {
+                $request->file('image')->move('upload/berita', $date.$random.$request->file('image')->getClientOriginalName());
+                $berita->gambar = $date.$random.$request->file('image')->getClientOriginalName();
+            }
+
+            $berita->save();
+            return redirect('/back-berita')->withStatus('Berhasil memperbarui data');
+        } catch(\Throwable $e){
+            return redirect()->back()->withError($e->getMessage());
+        } catch(\Illuminate\Database\QueryException $e){
+            return redirect()->back()->withError($e->getMessage());
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Berita  $berita
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Berita $berita)
     {
-        //
+        try {
+            Berita::find($berita->id)->delete();
+            return redirect('/back-berita')->withStatus('Berhasil menghapus data');
+        } catch(\Throwable $e){
+            return redirect()->back()->withError($e->getMessage());
+        } catch(\Illuminate\Database\QueryException $e){
+            return redirect()->back()->withError($e->getMessage());
+        }
     }
 }

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\KebijakanPrivasiController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\BeritaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +42,10 @@ Route::post('/back-menu/add', [MenuController::class, 'store']);
 Route::post('/back-menu/{menu}/edit', [MenuController::class, 'edit']);
 Route::put('/back-menu/update/{menu}', [MenuController::class, 'update']);
 Route::delete('/back-menu/{menu}/drop', [MenuController::class, 'destroy']);
+
+/* berita */
+Route::get('/back-berita', [BeritaController::class, 'index'])->name('berita');
+Route::post('/back-berita/add', [BeritaController::class, 'store']);
+Route::post('/back-berita/{berita}/edit', [BeritaController::class, 'edit']);
+Route::put('/back-berita/update/{berita}', [BeritaController::class, 'update']);
+Route::delete('/back-berita/{berita}/drop', [BeritaController::class, 'destroy']);
