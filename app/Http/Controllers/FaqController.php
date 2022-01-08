@@ -61,13 +61,6 @@ class FaqController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Faq  $faq
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Faq $faq)
     {
         $this->validate($request, [
@@ -89,7 +82,7 @@ class FaqController extends Controller
             $faq->deskripsi = $request->desc;
             $faq->save();
 
-            return redirect('/back-faq')->withStatus('Berhasil menambah data.');
+            return redirect('/back-faq')->withStatus('Berhasil memperbarui data.');
         } catch(\Throwable $e){
             return redirect()->back()->withError($e->getMessage());
         } catch(\Illuminate\Database\QueryException $e){
