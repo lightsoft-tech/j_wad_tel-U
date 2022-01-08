@@ -7,24 +7,17 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $param;
+    public function __construct()
+    {
+        $this->middleware(['role:admin']);
+    }
+    
+    
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $this->param['getMenu'] = Menu::get();
+        return view('backend.barang.list', $this->param);
     }
 
     /**
@@ -35,51 +28,107 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+                'title' => 'required',
+                'price' => 'required',
+                'desc' => 'required',
+            ],
+            [
+                'required' => ':attribute harus diisi.',
+            ],
+            [
+                'title' => 'Judul',
+                'price' => 'Harga',
+                'desc' => 'Deskripsi',
+            ],
+        );
+
+        try {
+            $date = date('H-i-s');
+            $random = \Str::random(5);
+
+            $menu = new Menu();
+            $menu->judul = $request->title;
+            $menu->harga = $request->price;
+            $menu->deskripsi = $request->desc;
+
+            if ($request->file('image')) {
+                $request->file('image')->move('upload/menu', $date.$random.$request->file('image')->getClientOriginalName());
+                $menu->gambar = $date.$random.$request->file('image')->getClientOriginalName();
+            } else {
+                $menu->gambar = 'menu.jpg';
+            }
+
+            $menu->save();
+            return redirect('/back-menu')->withStatus('Berhasil menambah data');
+        } catch(\Throwable $e){
+            return redirect()->back()->withError($e->getMessage());
+        } catch(\Illuminate\Database\QueryException $e){
+            return redirect()->back()->withError($e->getMessage());
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Menu  $menu
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Menu $menu)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Menu  $menu
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Menu $menu)
     {
-        //
+        try {
+            $this->param['getDetailMenu'] = Menu::find($menu->id);
+            return view('backend.barang.edit', $this->param);
+        } catch(\Throwable $e){
+            return redirect()->back()->withError($e->getMessage());
+        } catch(\Illuminate\Database\QueryException $e){
+            return redirect()->back()->withError($e->getMessage());
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Menu  $menu
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Menu $menu)
     {
-        //
+        $this->validate($request, [
+                'title' => 'required',
+                'price' => 'required',
+                'desc' => 'required',
+            ],
+            [
+                'required' => ':attribute harus diisi.',
+            ],
+            [
+                'title' => 'Judul',
+                'price' => 'Harga',
+                'desc' => 'Deskripsi',
+            ],
+        );
+
+        try {
+            $date = date('H-i-s');
+            $random = \Str::random(5);
+
+            $menu = Menu::find($menu->id);
+            $menu->judul = $request->title;
+            $menu->harga = $request->price;
+            $menu->deskripsi = $request->desc;
+
+            if ($request->file('image')) {
+                $request->file('image')->move('upload/menu', $date.$random.$request->file('image')->getClientOriginalName());
+                $menu->gambar = $date.$random.$request->file('image')->getClientOriginalName();
+            }
+
+            $menu->save();
+            return redirect('/back-menu')->withStatus('Berhasil menambah data');
+        } catch(\Throwable $e){
+            return redirect()->back()->withError($e->getMessage());
+        } catch(\Illuminate\Database\QueryException $e){
+            return redirect()->back()->withError($e->getMessage());
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Menu  $menu
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Menu $menu)
     {
-        //
+        try {
+            Menu::find($menu->id)->delete();
+            return redirect('/back-menu')->withStatus('Berhasil menghapus data');
+        } catch(\Throwable $e){
+            return redirect()->back()->withError($e->getMessage());
+        } catch(\Illuminate\Database\QueryException $e){
+            return redirect()->back()->withError($e->getMessage());
+        }
     }
 }

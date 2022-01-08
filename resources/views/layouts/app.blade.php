@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Admin WAD Upnormal') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -35,6 +35,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link @if (Request::segment(1) == 'back-menu') text-black @endif" href="{{ route('menu') }}">{{ __('Master Menu') }} </a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link @if (Request::segment(1) == 'back-faq') text-black @endif" href="{{ route('faq') }}">{{ __('FAQ') }} </a>
                         </li>

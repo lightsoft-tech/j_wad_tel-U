@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\KebijakanPrivasiController;
+use App\Http\Controllers\MenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,10 @@ Route::delete('/back-faq/{faq}/drop', [FaqController::class, 'destroy']);
 /* kebijakan privasi */
 Route::get('/back-kebijakan-privasi', [KebijakanPrivasiController::class, 'index'])->name('kebijakan-privasi');
 Route::put('/back-kebijakan-privasi/update/{kebijakanPrivasi}', [KebijakanPrivasiController::class, 'update']);
+
+/* menu */
+Route::get('/back-menu', [MenuController::class, 'index'])->name('menu');
+Route::post('/back-menu/add', [MenuController::class, 'store']);
+Route::post('/back-menu/{menu}/edit', [MenuController::class, 'edit']);
+Route::put('/back-menu/update/{menu}', [MenuController::class, 'update']);
+Route::delete('/back-menu/{menu}/drop', [MenuController::class, 'destroy']);
