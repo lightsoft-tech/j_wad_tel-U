@@ -7,57 +7,58 @@ use Illuminate\Http\Request;
 
 class FaqController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $param;
+    public function __construct()
+    {
+        $this->middleware(['role:admin']);
+    }
+    
+    
     public function index()
     {
-        //
+        $this->param['getFaq'] = Faq::get();
+        return view('backend.faq.list', $this->param);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+                'title' => 'required',
+                'desc' => 'required',
+            ],
+            [
+                'required' => ':attribute harus diisi.',
+            ],
+            [
+                'title' => 'Judul',
+                'desc' => 'Deskripsi',
+            ],
+        );
+
+        try {
+            $faq = new Faq();
+            $faq->judul = $request->title;
+            $faq->deskripsi = $request->desc;
+            $faq->save();
+
+            return redirect('/back-faq')->withStatus('Berhasil menambah data.');
+        } catch(\Throwable $e){
+            return redirect()->back()->withError($e->getMessage());
+        } catch(\Illuminate\Database\QueryException $e){
+            return redirect()->back()->withError($e->getMessage());
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Faq  $faq
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Faq $faq)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Faq  $faq
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Faq $faq)
     {
-        //
+        try {
+            $this->param['getDetailFaq'] = Faq::find($faq->id);
+            return view('backend.faq.edit', $this->param);
+        } catch(\Throwable $e){
+            return redirect()->back()->withError($e->getMessage());
+        } catch(\Illuminate\Database\QueryException $e){
+            return redirect()->back()->withError($e->getMessage());
+        }
     }
 
     /**
@@ -69,17 +70,42 @@ class FaqController extends Controller
      */
     public function update(Request $request, Faq $faq)
     {
-        //
+        $this->validate($request, [
+                'title' => 'required',
+                'desc' => 'required',
+            ],
+            [
+                'required' => ':attribute harus diisi.',
+            ],
+            [
+                'title' => 'Judul',
+                'desc' => 'Deskripsi',
+            ],
+        );
+
+        try {
+            $faq = Faq::find($faq->id);
+            $faq->judul = $request->title;
+            $faq->deskripsi = $request->desc;
+            $faq->save();
+
+            return redirect('/back-faq')->withStatus('Berhasil menambah data.');
+        } catch(\Throwable $e){
+            return redirect()->back()->withError($e->getMessage());
+        } catch(\Illuminate\Database\QueryException $e){
+            return redirect()->back()->withError($e->getMessage());
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Faq  $faq
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Faq $faq)
     {
-        //
+        try {
+            Faq::find($faq->id)->delete();
+            return redirect('/back-faq')->withStatus('Berhasil menghapus data.');
+        } catch(\Throwable $e){
+            return redirect()->back()->withError($e->getMessage());
+        } catch(\Illuminate\Database\QueryException $e){
+            return redirect()->back()->withError($e->getMessage());
+        }
     }
 }
