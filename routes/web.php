@@ -21,8 +21,7 @@ use App\Http\Controllers\KebijakanPrivasiController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-    // return view('auth.login');
+    return redirect('/login');
 });
 
 Auth::routes();
