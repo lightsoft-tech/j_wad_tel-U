@@ -84,5 +84,15 @@ Route::group(['middleware' => ['auth', 'role:customer']], function () {
         return view('frontend.keuangan');
     })->name('keuangan');
 
+    Route::get('/pembayaran', function () {
+        return view('frontend.pembayaran');
+    })->name('pembayaran');
+
+    Route::get('/berita/{id}', function ($id) {
+        $berita = Berita::findOrFail($id);
+        $all_berita = Berita::latest()->take(3)->get();
+        return view('frontend.detail', compact('berita', 'all_berita'));
+    });
+
     Route::put('/update-profile', [UserController::class, 'update']);
 });
