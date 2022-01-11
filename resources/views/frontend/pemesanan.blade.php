@@ -27,6 +27,12 @@
             <h5>{{$item->judul}}</h5>
             <p class="card-text card-title">{{ \Illuminate\Support\Str::limit($item->deskripsi, 30, $end='...') }}</p>
             <div class="text-head-3 text-left" style="color: var(--yellow-primary);">Rp {{$item->harga}}</div>
+            <form action="" method="post" class="mt-3">
+              @csrf
+              <button type="submit" class="login100-form-btn">
+                <i class="fa fa-plus"></i>&nbsp; Keranjang
+              </button>
+            </form>
           </div>
         </div>
       </div>
@@ -36,4 +42,12 @@
   </div>
 
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+@if (Session::has('keranjangSuccess'))
+    <script>
+        swal("Berhasil", "{!! Session::get('keranjangSuccess') !!}", "success",{
+            button: "OK",
+        })
+    </script>
+@endif
 @endsection
