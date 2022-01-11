@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::CUSTOMER;
 
     /**
      * Create a new controller instance.
@@ -64,11 +64,33 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        /* $customer = new \App\Models\User();
+        $customer->name = $data['name'];
+        $customer->email = $data['email'];
+        $customer->email_verified_at = now();
+        $customer->password = Hash::make($data['password']);
+        $customer->telepon = $data['telepon'];
+        $customer->avatar = 'avatar.png';
+        $customer->remember_token = \Str::random(60);
+        $customer->created_at = now();
+        $customer->updated_at = now();
+        $customer->save(); */
+
+        $customer = User::create([
+            /* 'name' => $data['name'],
             'email' => $data['email'],
             'telepon' => $data['telepon'],
+            'password' => Hash::make($data['password']), */
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'email_verified_at' => now(),
             'password' => Hash::make($data['password']),
+            'telepon' => $data['telepon'],
+            'avatar' => 'avatar.png',
+            'remember_token' => \Str::random(60),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
+        return $customer->assignRole('customer');
     }
 }
