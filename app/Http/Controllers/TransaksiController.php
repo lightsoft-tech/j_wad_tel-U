@@ -20,7 +20,7 @@ class TransaksiController extends Controller
 
     public function riwayat()
     {
-        $param['getRiwayat'] = $getMenus = \DB::table('transaksi')->select('menu.judul', 'menu.deskripsi', 'menu.harga', 'transaksi.id', 'transaksi.alamat_pengiriman', 'transaksi.tanggal_pengiriman', 'transaksi.waktu_pengiriman', 'transaksi.status_order', 'transaksi.pembayaran')
+        $param['getRiwayat'] = \DB::table('transaksi')->select('menu.judul', 'menu.deskripsi', 'menu.harga', 'transaksi.id', 'transaksi.alamat_pengiriman', 'transaksi.tanggal_pengiriman', 'transaksi.waktu_pengiriman', 'transaksi.status_order', 'transaksi.pembayaran')
         ->join('menu', 'transaksi.menu_id', '=', 'menu.id')
         ->where('pembayaran', '!=', 'belum dibayar')
         ->where('user_id', '=', \Auth::user()->id)
@@ -28,37 +28,39 @@ class TransaksiController extends Controller
         return view('frontend.keuangan', $param);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Transaksi  $transaksi
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Transaksi $transaksi)
+    public function list()
     {
-        //
+        $param['getList'] = \DB::table('transaksi')->select('menu.judul', 'menu.deskripsi', 'menu.harga', 'transaksi.id', 'transaksi.alamat_pengiriman', 'transaksi.tanggal_pengiriman', 'transaksi.waktu_pengiriman', 'transaksi.status_order', 'transaksi.pembayaran')
+        ->join('menu', 'transaksi.menu_id', '=', 'menu.id')
+        ->where('pembayaran', '!=', 'belum dibayar')
+        ->get(); 
+        return view('backend.transaksi.list', $param);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Transaksi  $transaksi
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Transaksi $transaksi)
+    public function proses(Transaksi $transaksi)
     {
-        //
+        $transaksiU = Transaksi::find($transaksi->id);
+        $transaksiU->status_order = 'dalam proses';
+        $transaksiU->save();
+
+        return redirect('/back-transaksi')->withStatus('Berhasil memperbarui data.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Transaksi  $transaksi
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Transaksi $transaksi)
+    public function perjalanan(Transaksi $transaksi)
     {
-        //
+        $transaksiU = Transaksi::find($transaksi->id);
+        $transaksiU->status_order = 'dalam perjalanan';
+        $transaksiU->save();
+
+        return redirect('/back-transaksi')->withStatus('Berhasil memperbarui data.');
+    }
+
+    public function done(Transaksi $transaksi)
+    {
+        $transaksiU = Transaksi::find($transaksi->id);
+        $transaksiU->status_order = 'diterima';
+        $transaksiU->save();
+
+        return redirect('/back-transaksi')->withStatus('Berhasil memperbarui data.');
     }
 }

@@ -56,6 +56,11 @@ Route::post('/back-berita/{berita}/edit', [BeritaController::class, 'edit']);
 Route::put('/back-berita/update/{berita}', [BeritaController::class, 'update']);
 Route::delete('/back-berita/{berita}/drop', [BeritaController::class, 'destroy']);
 
+Route::get('/back-transaksi', [TransaksiController::class, 'list'])->name('backtransac');
+Route::put('/back-transaksi/{transaksi}/proses', [TransaksiController::class, 'proses']);
+Route::put('/back-transaksi/{transaksi}/perjalanan', [TransaksiController::class, 'perjalanan']);
+Route::put('/back-transaksi/{transaksi}/done', [TransaksiController::class, 'done']);
+
 // FRONTEND
 
 Route::group(['middleware' => ['auth', 'role:customer']], function () {

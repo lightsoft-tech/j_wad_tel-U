@@ -47,6 +47,9 @@
                         <li class="nav-item">
                             <a class="nav-link @if (Request::segment(1) == 'back-kebijakan-privasi') text-black @endif" href="{{ route('kebijakan-privasi') }}">{{ __('Kebijakan Privasi') }} </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link @if (Request::segment(1) == 'back-transaksi') text-black @endif" href="{{ route('backtransac') }}">{{ __('Transaksi') }} </a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
