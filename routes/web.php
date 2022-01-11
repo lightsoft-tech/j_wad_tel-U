@@ -72,10 +72,9 @@ Route::group(['middleware' => ['auth', 'role:customer']], function () {
         return view('frontend.faq', compact('faq'));
     })->name('faq');
 
-    Route::get('/keranjang', function () {
-        return view('frontend.keranjang');
-    })->name('keranjang');
+    Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang');
     Route::post('/keranjang/add/{menu}', [KeranjangController::class, 'store']);
+    Route::post('/keranjang/transaksi', [KeranjangController::class, 'transaction']);
 
     Route::get('/pemesanan', function () {
         $menu = Menu::latest()->get();

@@ -17,10 +17,11 @@ class CreateTransaksiTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('menu_id');
-            $table->date('tanggal_transaksi');
-            $table->integer('jumlah');
+            $table->string('alamat_pengiriman');
+            $table->string('tanggal_pengiriman');
+            $table->string('waktu_pengiriman');
             $table->enum('status_order', ['dalam proses', 'dalam perjalanan', 'diterima']);
-            $table->enum('pembayaran', ['kartu debit', 'transfer', 'virtual account']);
+            $table->enum('pembayaran', ['kartu debit', 'transfer', 'virtual account', 'belum dibayar']);
             $table->timestamps();
         });
     }
