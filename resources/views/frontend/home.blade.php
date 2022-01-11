@@ -19,7 +19,7 @@
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner row w-100 mx-auto">
 
-          <div class="carousel-item card-berita-custom col-md-4 active">
+          {{-- <div class="carousel-item card-berita-custom col-md-4 active">
             <a href="detail.html">
 
               <div class="card">
@@ -31,10 +31,14 @@
                 </div>
               </div>
             </a>
-          </div>
+          </div> --}}
           
           @foreach ($berita as $item)
-          <div class="carousel-item card-berita-custom col-md-4">
+            @if ($item->id == 1)
+            <div class="carousel-item card-berita-custom col-md-4 active">
+            @else
+            <div class="carousel-item card-berita-custom col-md-4">
+            @endif
             <a href="berita/{{$item->id }}">
 
               <div class="card">
