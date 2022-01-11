@@ -3,39 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\Keranjang;
+use App\Models\Menu;
 use Illuminate\Http\Request;
 
 class KeranjangController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    private $param;
+    public function __construct()
     {
-        //
+        $this->middleware(['role:customer']);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(Menu $menu)
     {
-        //
-    }
+        try {
+            $keranjang = new Keranjang();
+            $keranjang->menu_id = $menu->id;
+            $keranjang->user_id = \Auth::user()->id;
+            $keranjang->status = 'keranjang';
+            $keranjang->save();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+            return redirect('/pemesanan')->withStatus('Berhasil menambah data')->with('keranjangSuccess', 'Berhasil Menambahkan ke Keranjang');
+        } catch(\Throwable $e){
+            return redirect()->back()->withError($e->getMessage());
+        } catch(\Illuminate\Database\QueryException $e){
+            return redirect()->back()->withError($e->getMessage());
+        }
     }
 
     /**
