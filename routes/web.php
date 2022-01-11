@@ -8,6 +8,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KebijakanPrivasiController;
+use App\Models\Faq;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +65,11 @@ Route::group(['middleware' => ['auth', 'role:customer']], function () {
     Route::get('/profile', function () {
         return view('frontend.profile');
     })->name('profile');
+
+    Route::get('/faq', function () {
+        $faq = Faq::latest()->get();
+        return view('frontend.faq', compact('faq'));
+    })->name('faq');
 
     Route::get('/keranjang', function () {
         return view('frontend.keranjang');
