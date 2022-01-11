@@ -38,6 +38,14 @@
             <a class="nav-link text-white" href=" {{ route('pemesanan') }}">Pemesanan</a>
             <a class="nav-link text-white" href=" {{ route('keuangan') }}">Keuangan</a>
             <a class="nav-link text-white" href=" {{ route('profile') }}">Profil</a>
+            <a class="nav-link text-white" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
           </div>
         </div>
       </div>
