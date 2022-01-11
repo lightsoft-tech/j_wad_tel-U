@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
-@section('content')
-<div class="container">
+@section('auth-content')
+{{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -61,5 +61,35 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
+
+<div class="limiter">
+    <div class="container-login100">
+      <div class="flex justify-content-center pb-2 custom-image">
+        <img src="images/upnormal _svg.svg" alt="" srcset="">
+      </div>
+      <div class="card-custom" style="padding: 2rem;">
+        <form class=" validate-form">
+          <span class="login100-form-title">
+            Atur Ulang Password
+            <p>Massukan password anda</p>
+          </span>
+
+          <div class="wrap-input100 validate-input">
+            <input class="input100" type="password" name="password" placeholder="Password baru">
+          </div>
+
+          <div class="wrap-input100 validate-input">
+            <input class="input100" type="password" name="password" placeholder="Ulangi password baru">
+          </div>
+
+          <div class="container-login100-form-btn">
+            <button class="login100-form-btn">
+              Kirim
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 @endsection

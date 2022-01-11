@@ -48,6 +48,8 @@
 
 @extends('layouts.auth')
 
+@section('title', 'Ubah password');
+
 @section('auth-content')
 <div class="limiter">
   <div class="container-login100">
@@ -61,7 +63,7 @@
         </div>
       @endif
   
-      <form method="POST" action="{{ route('password.email') }}" class=" validate-form">
+      <form action="{{url('/lupa-password')}}" method="POST" class=" validate-form">
         @csrf
         <span class="login100-form-title">
           Atur Ulang Password

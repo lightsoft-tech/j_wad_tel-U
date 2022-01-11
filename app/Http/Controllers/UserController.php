@@ -14,10 +14,7 @@ class UserController extends Controller
             'telepon' => 'required',
         ]);
 
-        // dd($request->name);
-
         $id = auth()->user()->id;
-
         $user = User::findOrFail($id);
 
         $user->name = $request->name;
@@ -38,5 +35,22 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->route('profile');
+    }
+
+    public function changePassword(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+        if ($user != null) {
+            return view('auth.passwords.reset2', compact('user'));
+        }
+        return redirect()->route('login');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+        $user->password = app('hash')->make($request->password);
+        $user->save();
+        return redirect()->route('login');
     }
 }

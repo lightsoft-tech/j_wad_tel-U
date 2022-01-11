@@ -97,4 +97,8 @@ Route::group(['middleware' => ['auth', 'role:customer']], function () {
     });
 
     Route::put('/update-profile', [UserController::class, 'update']);
+    // Route::get('/reset-password', [UserController::class, 'changePassword']);
 });
+
+Route::post('/lupa-password', [UserController::class, 'changePassword']);
+Route::put('/update-password', [UserController::class, 'updatePassword']);
