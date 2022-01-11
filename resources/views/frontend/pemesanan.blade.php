@@ -27,7 +27,7 @@
             <h5>{{$item->judul}}</h5>
             <p class="card-text card-title">{{ \Illuminate\Support\Str::limit($item->deskripsi, 30, $end='...') }}</p>
             <div class="text-head-3 text-left" style="color: var(--yellow-primary);">Rp {{$item->harga}}</div>
-            <form action="" method="post" class="mt-3">
+            <form action="{{url('keranjang/add')}}/{{$item->id}}" method="post" class="mt-3">
               @csrf
               <button type="submit" class="login100-form-btn">
                 <i class="fa fa-plus"></i>&nbsp; Keranjang

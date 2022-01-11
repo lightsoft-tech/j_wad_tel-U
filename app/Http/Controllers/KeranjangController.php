@@ -18,12 +18,12 @@ class KeranjangController extends Controller
     {
         try {
             $keranjang = new Keranjang();
-            $keranjang->menu_id = $keranjang->id;
+            $keranjang->menu_id = $menu->id;
             $keranjang->user_id = \Auth::user()->id;
             $keranjang->status = 'keranjang';
             $keranjang->save();
 
-            return redirect('/keranjang')->withStatus('Berhasil menambah data')->with('keranjangSuccess', 'Berhasil Menambahkan ke Keranjang');
+            return redirect('/pemesanan')->withStatus('Berhasil menambah data')->with('keranjangSuccess', 'Berhasil Menambahkan ke Keranjang');
         } catch(\Throwable $e){
             return redirect()->back()->withError($e->getMessage());
         } catch(\Illuminate\Database\QueryException $e){
