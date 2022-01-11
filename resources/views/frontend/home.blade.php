@@ -35,7 +35,7 @@
           
           @foreach ($berita as $item)
           <div class="carousel-item card-berita-custom col-md-4">
-            <a href="detail.html">
+            <a href="berita/{{$item->id }}">
 
               <div class="card">
                 <img class="img-fluid" alt="100%x280"
