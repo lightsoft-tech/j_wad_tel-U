@@ -7,46 +7,25 @@ use Illuminate\Http\Request;
 
 class TransaksiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    private $param;
     public function store(Request $request)
     {
-        //
+        
+        $updatePembayaran = Transaksi::where('pembayaran', 'belum dibayar')->where('user_id', \Auth::user()->id)->update([
+            'pembayaran' => $request->pembayaran,
+        ]);
+
+        return redirect('/keuangan')->with('paySuccess', 'Berhasil Melakukan Pembayaran');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Transaksi  $transaksi
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Transaksi $transaksi)
+    public function riwayat()
     {
-        //
+        $param['getRiwayat'] = $getMenus = \DB::table('transaksi')->select('menu.judul', 'menu.deskripsi', 'menu.harga', 'transaksi.id', 'transaksi.alamat_pengiriman', 'transaksi.tanggal_pengiriman', 'transaksi.waktu_pengiriman', 'transaksi.status_order', 'transaksi.pembayaran')
+        ->join('menu', 'transaksi.menu_id', '=', 'menu.id')
+        ->where('pembayaran', '!=', 'belum dibayar')
+        ->where('user_id', '=', \Auth::user()->id)
+        ->get(); 
+        return view('frontend.keuangan', $param);
     }
 
     /**

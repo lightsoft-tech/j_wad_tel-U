@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KebijakanPrivasiController;
 use App\Http\Controllers\KeranjangController;
+use App\Http\Controllers\TransaksiController;
 use App\Models\Faq;
 
 /*
@@ -81,13 +82,12 @@ Route::group(['middleware' => ['auth', 'role:customer']], function () {
         return view('frontend.pemesanan', compact('menu'));
     })->name('pemesanan');
 
-    Route::get('/keuangan', function () {
-        return view('frontend.keuangan');
-    })->name('keuangan');
+    Route::get('/keuangan', [TransaksiController::class, 'riwayat'])->name('keuangan');
 
     Route::get('/pembayaran', function () {
         return view('frontend.pembayaran');
     })->name('pembayaran');
+    Route::post('/pembayaran/bayar', [TransaksiController::class, 'store']);
 
     Route::get('/berita/{id}', function ($id) {
         $berita = Berita::findOrFail($id);

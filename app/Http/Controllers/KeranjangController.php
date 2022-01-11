@@ -66,6 +66,8 @@ class KeranjangController extends Controller
             'status' => 'checkout',
         ]);
         /* dd($transacArray); */
+
+        return view('frontend.pembayaran');
     }
 
     /**
