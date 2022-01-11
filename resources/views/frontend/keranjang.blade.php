@@ -6,18 +6,18 @@
 <div class="container ">
   <div class="text-head-2 text-center py-5">Keranjang</div>
   <div class="row">
-    <div class="col-md-6">
+    {{-- <div class="col-md-6">
       <p>Pilih semua</p>
-    </div>
-    <div class="col-md-6">
+    </div> --}}
+    {{-- <div class="col-md-6">
       <a href="#" class="btn btn-warning float-right">hapus</a>
-    </div>
+    </div> --}}
   </div>
   <div class="">
     <div class="row mt-3">
       <div class="col-md-6">
         <div class="d-flex">
-          <input class="my-auto mr-4" type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+          {{-- <input class="my-auto mr-4" type="checkbox" id="vehicle1" name="vehicle1" value="Bike"> --}}
           <div class="">
             <p>Saus Khas Upnormal</p>
             <p>3 box</p>
@@ -122,6 +122,11 @@
       </div>
     </div>
     <hr>
+    <div class="my-2 pb-2">
+      <button type="submit" class="login100-form-btn">
+        Lanjut ke Pembayaran
+      </button>
+    </div>
   </div>
 </div>
 @endsection
