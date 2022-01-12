@@ -113,7 +113,7 @@
             </div>
             <div class="card">
               <div class="card-header" id="faqhead4">
-                <a href="{{ route('faq') }}" class="btn btn-header-link collapsed text-head-3"
+                <a href="{{ url('/faq') }}" class="btn btn-header-link collapsed text-head-3"
                   aria-expanded="true" >FAQ</a>
               </div>
             </div>
@@ -126,5 +126,13 @@
     </div>
   </form>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+@if (Session::has('updateSuccess'))
+    <script>
+        swal("Berhasil", "{!! Session::get('updateSuccess') !!}", "success",{
+            button: "OK",
+        })
+    </script>
+@endif
 @endsection
 

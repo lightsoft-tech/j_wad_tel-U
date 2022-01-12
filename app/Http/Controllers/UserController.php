@@ -34,7 +34,7 @@ class UserController extends Controller
         }
         $user->save();
 
-        return redirect()->route('profile');
+        return redirect()->route('profile')->with('updateSuccess', 'Berhasil Memperbarui Akun');
     }
 
     public function changePassword(Request $request)

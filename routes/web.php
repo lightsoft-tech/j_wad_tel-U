@@ -76,7 +76,7 @@ Route::group(['middleware' => ['auth', 'role:customer']], function () {
     Route::get('/faq', function () {
         $faq = Faq::latest()->get();
         return view('frontend.faq', compact('faq'));
-    })->name('faq');
+    });
 
     Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang');
     Route::post('/keranjang/add/{menu}', [KeranjangController::class, 'store']);

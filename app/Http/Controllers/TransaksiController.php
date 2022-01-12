@@ -24,7 +24,8 @@ class TransaksiController extends Controller
         ->join('menu', 'transaksi.menu_id', '=', 'menu.id')
         ->where('pembayaran', '!=', 'belum dibayar')
         ->where('user_id', '=', \Auth::user()->id)
-        ->get(); 
+        ->orderBy('transaksi.id', 'desc')
+        ->get();
         return view('frontend.keuangan', $param);
     }
 
@@ -33,7 +34,7 @@ class TransaksiController extends Controller
         $param['getList'] = \DB::table('transaksi')->select('menu.judul', 'menu.deskripsi', 'menu.harga', 'transaksi.id', 'transaksi.alamat_pengiriman', 'transaksi.tanggal_pengiriman', 'transaksi.waktu_pengiriman', 'transaksi.status_order', 'transaksi.pembayaran')
         ->join('menu', 'transaksi.menu_id', '=', 'menu.id')
         ->where('pembayaran', '!=', 'belum dibayar')
-        ->get(); 
+        ->get();
         return view('backend.transaksi.list', $param);
     }
 
