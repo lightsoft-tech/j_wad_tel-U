@@ -9,7 +9,9 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    background: url("../images/background_svg.svg"), linear-gradient(to top, #f1e8c4, #fff, 100%, transparent 50%);
+    background-image: url('../images/bg_register3.png');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .container-custom {
