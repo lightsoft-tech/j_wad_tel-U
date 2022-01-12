@@ -34,13 +34,8 @@
           </div> --}}
           
           @foreach ($berita as $item)
-            @if ($item->id == 1)
-            <div class="carousel-item card-berita-custom col-md-4 active">
-            @else
-            <div class="carousel-item card-berita-custom col-md-4">
-            @endif
+          <div class="carousel-item card-berita-custom col-md-4 @if ($item->id == 1) active @endif">
             <a href="berita/{{$item->id }}">
-
               <div class="card">
                 <img class="img-fluid" alt="100%x280"
                   src="{{asset('upload/berita')}}/{{$item->gambar}}">

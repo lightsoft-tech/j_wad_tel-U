@@ -85,7 +85,14 @@
 <div class="limiter">
     <div class="container-register100">
       <img src="{{ asset('frontend/images/bg_regsiter1.svg') }}" alt="">
-      <div class="card-custom" style="padding: 2rem;">
+      <div class="card-custom" style="
+        padding: 2rem;
+        position: absolute;  
+        margin-left: auto;
+        margin: auto;
+        margin-right: auto;
+        left: 38%;
+        right: 38%;">
         <form  method="POST" action="{{ route('register') }}" class=" validate-form">
           @csrf
           <span class="login100-form-title">

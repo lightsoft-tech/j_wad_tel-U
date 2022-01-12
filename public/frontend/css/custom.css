@@ -1,113 +1,113 @@
 .container-register100 {
-  width: 100%;
-  min-height: 100vh;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  background: url("../images/background_svg.svg"), linear-gradient(to top, #f1e8c4, #fff, 100%, transparent 50%);
+    width: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background: url("../images/background_svg.svg"), linear-gradient(to top, #f1e8c4, #fff, 100%, transparent 50%);
 }
 
 .container-custom {
-  width: 100%;
-  /* background-position: top; */
-  /* background-size: auto; */
-  /* min-height: 100vh; */
-  height: fit-content;
-  background: url("../images/background_svg.svg");
+    width: 100%;
+    /* background-position: top; */
+    /* background-size: auto; */
+    /* min-height: 100vh; */
+    height: fit-content;
+    background: url("../images/background_svg.svg");
 }
 
 .text-head {
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 48px;
-  text-align: center;
-  letter-spacing: -0.011em;
-  color: #000000;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+    text-align: center;
+    letter-spacing: -0.011em;
+    color: #000000;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .text-head-2 {
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 24px;
-  letter-spacing: -0.011em;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 24px;
+    letter-spacing: -0.011em;
 
-  /* color: var(--yellow-primary); */
+    /* color: var(--yellow-primary); */
 }
 
 .text-head-3 {
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 22px;
-  /* identical to box height */
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height */
 
-  text-align: center;
+    text-align: center;
 }
 
 .regular-text {
-  font-size: 18px;
+    font-size: 18px;
 }
 
 .card-title-1 {
-  font-family: Montserrat;
-  font-style: italic;
-  font-size: 18px;
-  line-height: 24px;
-  letter-spacing: -0.011em;
-  text-decoration: none;
+    font-family: Montserrat;
+    font-style: italic;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: -0.011em;
+    text-decoration: none;
 }
 
 .card-berita-custom:hover .card-title-1 {
-  color: var(--yellow-primary);
+    color: var(--yellow-primary);
 }
 
 .card-berita-custom a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .text-italic-2 {
-  font-family: Montserrat;
-  font-style: italic;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 20px;
+    font-family: Montserrat;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
 }
 
 ul.icons li a {
-  transition: background-color .2s ease-in-out;
-  border-radius: 100%;
-  border: 1px solid hsla(0, 0%, 87.8%, .75);
-  display: inline-block;
-  height: 4em;
-  line-height: 2em;
-  text-align: center;
-  width: 4em;
-  background: var(--yellow-primary);
-  padding: .7rem;
+    transition: background-color .2s ease-in-out;
+    border-radius: 100%;
+    border: 1px solid hsla(0, 0%, 87.8%, .75);
+    display: inline-block;
+    height: 4em;
+    line-height: 2em;
+    text-align: center;
+    width: 4em;
+    background: var(--yellow-primary);
+    padding: .7rem;
 }
 
 ul.icons li i {
-  font-size: 2rem;
+    font-size: 2rem;
 }
 
 .small-card-profile {
-  height: 60px;
-  width: 60px;
-  border-radius: 50%;
-  margin-right: 10px;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    margin-right: 10px;
 }
 
 
 .img-fluid-custom {
-  width: 100%;
+    width: 100%;
 }
